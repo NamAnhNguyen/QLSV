@@ -76,14 +76,13 @@ public class CRU_StudentFragment extends Fragment {
         Log.v("studentIDDDDDDD", String.valueOf(passingStudentId));
 
         if (passingStudentId != -1) {
+            Log.v("sssssssss","incase!=-1");
             File storagePath = getActivity().getApplication().getFilesDir();
             String DBpath = storagePath + "/" + "QLSV_DB";
             try {
                 DB = SQLiteDatabase.openDatabase(DBpath, null, SQLiteDatabase.CREATE_IF_NECESSARY);
+                Cursor cursor =  DB.rawQuery("select * from students where id = " + String.valueOf(passingStudentId), null);
 
-                DB.rawQuery("select * from students where id = " + String.valueOf(passingStudentId), null);
-
-                Cursor cursor = DB.rawQuery("select * from students", null);
                 cursor.moveToPosition(-1);
                 while (cursor.moveToNext()) {
                     Student student = new Student(
